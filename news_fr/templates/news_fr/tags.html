@@ -1,0 +1,14 @@
+<div class="card mb-4 border-warning">
+    <div class="card-header bg-transparent border-warning">Mots clés</div>
+    <div class="card-body {{ menu_class_fr }}">
+        <div class="row">
+            
+            <ul class="text-primary mb-0">
+                {% for item in tags_fr %}
+                <a class="badge fs-6 m-1 bg-primary text-decoration-none link-light" href="{{ item.get_absolute_url_fr }}">{{ item.title_fr }}</a> 
+                {% endfor %}
+            </ul>
+            
+        </div>
+    </div>
+</div>

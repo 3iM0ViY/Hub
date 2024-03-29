@@ -1,0 +1,29 @@
+<div class="card mb-4 border-warning">
+    <div class="card-header bg-primary border-primary badge">Popular</div>
+    <div class="card-body {{ menu_class_en }}">
+        <div class="row">
+            
+                {% for post in posts_en %}
+                <div class=" mb-3">
+                    {% if post.short_story_en %}
+                        {% if post.photo_en %}
+                            <img class="card-img-top" src="{{ post.photo_en.url }}" alt="{{ post.title_en }}" width="850" />
+                        {% endif %}
+                            <h4 class="card-title">{{ post.title_en }}</h4>
+                            <div class="small text-muted">{{ post.created_at_en }}{% if post.author_en %}, {{ post.author_en }}{% endif %}</div>
+                    {% else %}
+                    <a class="text-decoration-none" href="{{ post.get_absolute_url_en }}">
+                        {% if post.photo_en %}
+                        <img class="card-img-top" src="{{ post.photo_en.url }}" alt="{{ post.title_en }}" width="850" />
+                        {% endif %}
+                        <h4 class="card-title">{{ post.title_en }}</h4>
+                        <div class="small text-muted">{{ post.created_at_en }}{% if post.author_en %}, {{ post.author_en }}{% endif %}</div>
+                    </a>
+                    {% endif %}
+                </div>
+                <hr style="color: blue;">
+                {% endfor %}
+            
+        </div>
+    </div>
+</div>

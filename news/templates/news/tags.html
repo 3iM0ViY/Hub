@@ -1,0 +1,14 @@
+<div class="card mb-4 border-warning">
+    <div class="card-header bg-transparent border-warning">Теги</div>
+    <div class="card-body {{ menu_class }}">
+        <div class="row">
+            
+            <ul class="text-primary mb-0">
+                {% for item in tags %}
+                <a class="badge fs-6 m-1 bg-primary text-decoration-none link-light" href="{{ item.get_absolute_url }}">{{ item.title }}</a> 
+                {% endfor %}
+            </ul>
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="card mb-4 border-warning">
+    <div class="card-header bg-primary border-primary badge">Populaire</div>
+    <div class="card-body {{ menu_class_fr }}">
+        <div class="row">
+            
+                {% for post in posts_fr %}
+                <div class=" mb-3">
+                    {% if post.short_story_fr %}
+                        {% if post.photo_fr %}
+                            <img class="card-img-top" src="{{ post.photo_fr.url }}" alt="{{ post.title_fr }}" width="850" />
+                        {% endif %}
+                            <h4 class="card-title">{{ post.title_fr }}</h4>
+                            <div class="small text-muted">{{ post.created_at_fr }}{% if post.author_fr %}, {{ post.author_fr }}{% endif %}</div>
+                    {% else %}
+                    <a class="text-decoration-none" href="{{ post.get_absolute_url_fr }}">
+                        {% if post.photo_fr %}
+                        <img class="card-img-top" src="{{ post.photo_fr.url }}" alt="{{ post.title_fr }}" width="850" />
+                        {% endif %}
+                        <h4 class="card-title">{{ post.title_fr }}</h4>
+                        <div class="small text-muted">{{ post.created_at_fr }}{% if post.author_fr %}, {{ post.author_fr }}{% endif %}</div>
+                    </a>
+                    {% endif %}
+                </div>
+                <hr style="color: blue;">
+                {% endfor %}
+            
+        </div>
+    </div>
+</div>

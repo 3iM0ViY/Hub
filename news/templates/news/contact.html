@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block site_title %}{{ title }}{% endblock %}
+
+{% block banner %}
+<header style="background-color: antiquewhite;" class="py-3 border-bottom border-warning mb-4">
+    <div class="container">
+        <div class="text-center my-3">
+            <h1 class="fw-bolder">Наші контакти</h1>
+            <p class="lead mb-0">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="col-lg-8">
+    <form action="{% url 'contact' %}" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary btn-block input-group">Надіслати відгук</button>
+    </form>
+
+    
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <p class="lead">Разом ми переможемо!!!</p>
+                <p class="lead">Наш і-мейл: ua.civilsocietyhub@gmail.com</p>
+                <p class="lead">Наша адреса: Station Europe, European Parliament visitors center, Pl. du Luxembourg, 1050 Ixelles, Belgium</p>
+            </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.5746103215447!2d4.371169215745528!3d50.83904287953094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c49a53ef40e5%3A0x95f022428e027cfc!2sStation%20Europe!5e0!3m2!1suk!2sbe!4v1649364519219!5m2!1suk!2sbe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

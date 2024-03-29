@@ -1,0 +1,15 @@
+<div class="card mb-4 border-warning">
+    <div class="card-header bg-transparent border-warning">Категорії</div>
+    <div class="card-body {{ menu_class }}">
+        <div class="row">
+            
+                <ul class="text-primary mb-0"> 
+                    {% for item in categories %}
+                    <a class="input-group fs-6 m-1 text badge bg-primary text-decoration-none link-light" href="{{ item.get_absolute_url }}">{{ item.title }}</a>
+                    </br>
+                    {% endfor %}
+                </ul>
+            
+        </div>
+    </div>
+</div>

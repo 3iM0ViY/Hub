@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block site_title %}{{ post_fr.title_fr }}{% endblock %}
+
+{% block banner %}
+{% endblock %}
+
+{% block content %}
+<div class="col-lg-8">
+    <!-- Post_fr content-->
+    <article>
+        <!-- Post_fr header-->
+        <header class="mb-4">
+            <!-- Post_fr title-->
+            <h1 class="fw-bolder mb-1">{{ post_fr.title_fr }}</h1>
+            <!-- Post_fr meta content-->
+            <div class="text-muted fst-italic mb-2">{{ post_fr.created_at_fr }}{% if post_fr.author_fr %}, {{ post_fr.author_fr }}{% endif %}, views: {{ post_fr.views_fr }}</div>
+            <!-- Post_fr categories-->
+            <a class="badge bg-primary text-decoration-none link-light" href="{{ post_fr.category_fr.get_absolute_url_fr }}">{{ post_fr.category_fr }}</a>
+            {% if post_fr.tags_fr.exists %}
+                {% for tag in post_fr.tags_fr.all %}
+                    <a class="badge bg-primary text-decoration-none link-light" href="{{ tag.get_absolute_url_fr }}">{{ tag.title_fr }}</a>
+                {% endfor %}
+            {% endif %}
+        </header>
+        <!-- Preview image figure-->
+        {% if post_fr.photo_fr %}
+        <figure class="mb-4"><img class="img-fluid rounded" src="{{ post_fr.photo_fr.url }}" alt="{{ post_fr.title_fr }}" /></figure>
+        {% endif %}
+        <!-- Post_fr content-->
+        <section class="mb-5">
+            {{ post_fr.content_fr|safe }}
+        </section>
+    </article>
+</div>
+{% endblock %}
+
+
+{% block loaders %}
+    {% load menu_fr %}
+    {% load tags_fr %}
+    {% load popular_fr %}
+{% endblock %}
+
+{% block navbar %}
+<a class="navbar-brand" href="{% url 'home_fr' %}">Ukrainian Civil Society Hub</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+            <a class="active" href="http://127.0.0.1:8000">
+                <svg style="height: 25px; margin-top: 10px;" xmlns="http://www.w3.org/2000/svg" id="flag-icons-ua" viewBox="0 0 640 480">
+                <g fill-rule="evenodd" stroke-width="1pt">
+                <path fill="#ffd700" d="M0 0h640v480H0z"/>
+                <path fill="#0057b8" d="M0 0h640v240H0z"/>
+                </g>
+                </svg>
+            </a>
+            <a class="active" href="http://127.0.0.1:8000/fr/">
+                <svg style="height: 25px; margin-top: 10px;" xmlns="http://www.w3.org/2000/svg" id="flag-icons-fr" viewBox="0 0 640 480">
+                  <g fill-rule="evenodd" stroke-width="1pt">
+                    <path fill="#fff" d="M0 0h640v480H0z"/>
+                    <path fill="#002654" d="M0 0h213.3v480H0z"/>
+                    <path fill="#ce1126" d="M426.7 0H640v480H426.7z"/>
+                  </g>
+                </svg>
+            </a>
+            <a class="active" href="http://127.0.0.1:8000/en/">
+                <svg style="height: 25px; margin-top: 10px;" xmlns="http://www.w3.org/2000/svg" id="flag-icons-gb" viewBox="0 0 640 480">
+                <path fill="#012169" d="M0 0h640v480H0z"/>
+                <path fill="#FFF" d="m75 0 244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0h75z"/>
+                <path fill="#C8102E" d="m424 281 216 159v40L369 281h55zm-184 20 6 35L54 480H0l240-179zM640 0v3L391 191l2-44L590 0h50zM0 0l239 176h-60L0 42V0z"/>
+                <path fill="#FFF" d="M241 0v480h160V0H241zM0 160v160h640V160H0z"/>
+                <path fill="#C8102E" d="M0 193v96h640v-96H0zM273 0v480h96V0h-96z"/>
+                </svg>
+            </a>
+        </li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'home_fr' %}">Page d'accueil</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'about_us_fr' %}">À propos</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'contact_fr' %}">Contact</a></li>
+    </ul>
+</div>
+{% endblock %}
+
+
+
+{% block search %}
+<div class="card border-warning mb-4">
+    <div class="card-header bg-transparent border-warning">Chercher</div>
+    <div class="card-body">
+        <form class="input-group" action="{% url 'search_fr' %}" method="get">
+            <input class="form-control bg-transparent border-warning" type="text" name="s" placeholder="Entrez le terme de recherche..." aria-label="Entrez le terme de recherche..." aria-describedby="button-search" />
+            <button class="btn btn-primary" id="button-search" type="submit">Découvrir</button>
+        </form> 
+    </div>
+</div>
+{% endblock %}
+
+{% block categories %}
+    {% show_menu_fr %}
+    {% show_tags_fr %}
+    {% get_popular_fr %}
+{% endblock %}
+
+{% block footer %}
+<a class="navbar-brand" href="{% url 'home_fr' %}">Ukrainian Civil Society Hub</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active" href="{% url 'home_fr' %}">Page d'accueil</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'about_us_fr' %}">À propos</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'contact_fr' %}">Contact</a></li>
+    </ul>
+</div>
+{% endblock %}

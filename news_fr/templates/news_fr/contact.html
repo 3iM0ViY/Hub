@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block site_title %}{{ title }}{% endblock %}
+
+{% block banner %}
+<header style="background-color: antiquewhite;" class="py-3 border-bottom border-warning mb-4">
+    <div class="container">
+        <div class="text-center my-3">
+            <h1 class="fw-bolder">Nos contacts</h1>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="col-lg-8">
+    <form action="{% url 'contact_fr' %}" method="POST">
+        {% csrf_token %}
+        {{form_fr.as_p}}
+        <button type="submit" class="btn btn-primary btn-block input-group">Envoyer le commentaire</button>
+    </form>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <p class="lead">Tous ensemble nous gagnerons!!!</p>
+                <p class="lead">Notre e-mail: ua.civilsocietyhub@gmail.com</p>
+                <p class="lead">Notre adresse: Station Europe, Centre des visiteurs du Parlement Européen, Pl. du Luxembourg, 1050 Ixelles, Belgique</p>
+            </div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.5746103215447!2d4.371169215745528!3d50.83904287953094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c49a53ef40e5%3A0x95f022428e027cfc!2sStation%20Europe!5e0!3m2!1suk!2sbe!4v1649364519219!5m2!1suk!2sbe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+
+{% block loaders %}
+    {% load menu_fr %}
+    {% load tags_fr %}
+    {% load popular_fr %}
+{% endblock %}
+
+{% block navbar %}
+<a class="navbar-brand" href="{% url 'home_fr' %}">Ukrainian Civil Society Hub</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+            <a class="active" href="http://127.0.0.1:8000">
+                <svg style="height: 25px; margin-top: 10px;" xmlns="http://www.w3.org/2000/svg" id="flag-icons-ua" viewBox="0 0 640 480">
+                <g fill-rule="evenodd" stroke-width="1pt">
+                <path fill="#ffd700" d="M0 0h640v480H0z"/>
+                <path fill="#0057b8" d="M0 0h640v240H0z"/>
+                </g>
+                </svg>
+            </a>
+            <a class="active" href="http://127.0.0.1:8000/fr/">
+                <svg style="height: 25px; margin-top: 10px;" xmlns="http://www.w3.org/2000/svg" id="flag-icons-fr" viewBox="0 0 640 480">
+                  <g fill-rule="evenodd" stroke-width="1pt">
+                    <path fill="#fff" d="M0 0h640v480H0z"/>
+                    <path fill="#002654" d="M0 0h213.3v480H0z"/>
+                    <path fill="#ce1126" d="M426.7 0H640v480H426.7z"/>
+                  </g>
+                </svg>
+            </a>
+            <a class="active" href="http://127.0.0.1:8000/en/">
+                <svg style="height: 25px; margin-top: 10px;" xmlns="http://www.w3.org/2000/svg" id="flag-icons-gb" viewBox="0 0 640 480">
+                <path fill="#012169" d="M0 0h640v480H0z"/>
+                <path fill="#FFF" d="m75 0 244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0h75z"/>
+                <path fill="#C8102E" d="m424 281 216 159v40L369 281h55zm-184 20 6 35L54 480H0l240-179zM640 0v3L391 191l2-44L590 0h50zM0 0l239 176h-60L0 42V0z"/>
+                <path fill="#FFF" d="M241 0v480h160V0H241zM0 160v160h640V160H0z"/>
+                <path fill="#C8102E" d="M0 193v96h640v-96H0zM273 0v480h96V0h-96z"/>
+                </svg>
+            </a>
+        </li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'home_fr' %}">Page d'accueil</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'about_us_fr' %}">À propos</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'contact_fr' %}">Contact</a></li>
+    </ul>
+</div>
+{% endblock %}
+
+
+{% block title %}Ukrainian Civil Society Hub{% endblock %}
+{% block subtitle %}Lorem ipsum dolor sit amet consectetur adipisicing elit.{% endblock %}
+
+{% block search %}
+<div class="card border-warning mb-4">
+    <div class="card-header bg-transparent border-warning">Chercher</div>
+    <div class="card-body">
+        <form class="input-group" action="{% url 'search_fr' %}" method="get">
+            <input class="form-control bg-transparent border-warning" type="text" name="s" placeholder="Entrez le terme de recherche..." aria-label="Entrez le terme de recherche..." aria-describedby="button-search" />
+            <button class="btn btn-primary" id="button-search" type="submit">Découvrir</button>
+        </form> 
+    </div>
+</div>
+{% endblock %}
+
+{% block categories %}
+    {% show_menu_fr %}
+    {% show_tags_fr %}
+    {% get_popular_fr %}
+{% endblock %}
+
+{% block footer %}
+<a class="navbar-brand" href="{% url 'home_fr' %}">Ukrainian Civil Society Hub</a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active" href="{% url 'home_fr' %}">Page d'accueil</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'about_us_fr' %}">À propos</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'contact_fr' %}">Contact</a></li>
+    </ul>
+</div>
+{% endblock %}

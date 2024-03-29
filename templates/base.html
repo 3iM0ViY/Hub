@@ -1,0 +1,204 @@
+{% load static %}
+{% block loaders %}
+	{% load menu %}
+	{% load tags %}
+	{% load popular %}
+{% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content=" Ukrainian Volunteer Hub in Brussels" />
+        <title>Ukranie Civil Society Hub :: {% block site_title %}{{ title }}{% endblock %}</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/ukraine.ico' %}" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
+            <div class="container">
+                {% block navbar %}
+                <a class="navbar-brand" href="{% url 'home' %}">Ukranie Civil Society Hub</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="active" href="http://127.0.0.1:8000">
+                                <svg style="height: 25px; margin-top: 10px;" xmlns="http://www.w3.org/2000/svg" id="flag-icons-ua" viewBox="0 0 640 480">
+                                <g fill-rule="evenodd" stroke-width="1pt">
+                                <path fill="#ffd700" d="M0 0h640v480H0z"/>
+                                <path fill="#0057b8" d="M0 0h640v240H0z"/>
+                                </g>
+                                </svg>
+                            </a>
+                            <a class="active" href="http://127.0.0.1:8000/fr/">
+                                <svg style="height: 25px; margin-top: 10px;" xmlns="http://www.w3.org/2000/svg" id="flag-icons-fr" viewBox="0 0 640 480">
+                                  <g fill-rule="evenodd" stroke-width="1pt">
+                                    <path fill="#fff" d="M0 0h640v480H0z"/>
+                                    <path fill="#002654" d="M0 0h213.3v480H0z"/>
+                                    <path fill="#ce1126" d="M426.7 0H640v480H426.7z"/>
+                                  </g>
+                                </svg>
+                            </a>
+                            <a class="active" href="http://127.0.0.1:8000/en/">
+                                <svg style="height: 25px; margin-top: 10px;" xmlns="http://www.w3.org/2000/svg" id="flag-icons-gb" viewBox="0 0 640 480">
+                                <path fill="#012169" d="M0 0h640v480H0z"/>
+                                <path fill="#FFF" d="m75 0 244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0h75z"/>
+                                <path fill="#C8102E" d="m424 281 216 159v40L369 281h55zm-184 20 6 35L54 480H0l240-179zM640 0v3L391 191l2-44L590 0h50zM0 0l239 176h-60L0 42V0z"/>
+                                <path fill="#FFF" d="M241 0v480h160V0H241zM0 160v160h640V160H0z"/>
+                                <path fill="#C8102E" d="M0 193v96h640v-96H0zM273 0v480h96V0h-96z"/>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link active" href="{% url 'home' %}">Головна</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="{% url 'about_us' %}">Про нас</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="{% url 'contact' %}">Зворотній зв'язок</a></li>
+                    </ul>
+                </div>
+                {% endblock %}
+            </div>
+        </nav>
+
+<!-- Page header with logo and tagline-->
+{% block banner %}
+<header class="py-5 bg-light border-bottom border-warning mb-4">
+    <div class="container">
+        <div class="text-center my-5">
+            <h1 class="fw-bolder">{% block title %}Ukranie Civil Society Hub{% endblock %}</h1>
+            <p class="lead mb-0">{% block subtitle %}Lorem ipsum dolor sit amet consectetur adipisicing elit.{% endblock %}</p>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+<!-- Page content-->
+<div class="container mt-4">
+    <div class="row">
+        <!-- Blog entries-->
+        {% block content %}
+        <div class="col-lg-8">
+		    <!-- Featured blog post-->
+		    {% for post in posts %}
+		    <div class="card mb-4 border-warning">
+		    	{% if post.photo %}
+			    	{% if post.short_story %}
+			    	<img class="card-img-top" src="{{ post.photo.url }}" alt="{{ post.title }}" width="850" />
+			    	{% else %}
+			        <a href="{{ post.get_absolute_url }}"><img class="card-img-top" src="{{ post.photo.url }}" alt="{{ post.title }}" width="850" /></a>
+			        {% endif %}
+		        {% endif %}
+		        <div class="card-body">
+		            <div class="small text-muted">{{ post.created_at }}{% if post.author %}, {{ post.author }}{% endif %}</div>
+		            {% if post.short_story %}
+		            	<h2 class="card-title">{{ post.title }}</h2>
+		            	{{ post.content|safe }}
+		            {% else %}
+			            <h2 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+			            {{ post.content|truncatewords_html:30|safe }}
+			            <a class="btn btn-primary" href="{{ post.get_absolute_url }}">Чиатати далі →</a>
+		            {% endif %}
+		        </div>
+		    </div>
+		    {% empty %}
+		    <div class="card mb-4 border-warning">
+		    	<h2 class="card-title m-2 text-center">
+		    		Вибачте, проте за вашим запитом нічого не знайдено
+		    	</h2>
+		    </div>
+		    {% endfor %}
+		    <!-- Nested row for non-featured blog posts-->
+		    
+		    {% if page_obj.has_other_pages %}
+		    <!-- Pagination-->
+		    <nav aria-label="Pagination">
+		        <hr class="my-0" />
+		        <ul class="pagination justify-content-center my-4 ">
+		        	{% if page_obj.has_previous %}
+		            <li class="page-item"><a class="page-link" href="?{% block s2 %}{% endblock %}page={{ page_obj.previous_page_number }}" tabindex="-1" aria-disabled="true">Новіше</a></li>
+		            {% endif %}
+
+		            {% comment %}
+		            {% if page_obj.number|add:page_obj.start_index.number > 1 %}
+		            <!-- <li class="page-item"><a class="page-link" href="?page={{ page_obj.start_index }}">{{ page_obj.start_index }}</a></li>
+		        	<li class="page-item disabled"><a class="page-link" href="#">...</a></li> -->
+		            {% endif %}
+		            {% endcomment %}
+
+		            {% for p in page_obj.paginator.page_range %}
+		            	{% if page_obj.number == p %}
+		        		<li class="page-item active" aria-current="page"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+		            	{% elif p > page_obj.number|add:-4 and p < page_obj.number|add:4 %}
+						<li class="page-item"><a class="page-link" href="?{% block s %}{% endblock %}page={{ p }}">{{ p }}</a></li>
+						{% endif %}
+		            {% endfor %}
+
+		            {% comment %}
+		            {% if page_obj.end_index.number > page_obj.number|add:1 %}
+		            <!-- <li class="page-item"><a class="page-link" href="?page={{ page_obj.start_index }}">{{ page_obj.start_index }}</a></li>
+		        	<li class="page-item disabled"><a class="page-link" href="#">...</a></li> -->
+		            {% endif %}
+		            {% endcomment %}
+
+		            {% if page_obj.has_next %}
+		            <li class="page-item"><a class="page-link" href="?{% block s3 %}{% endblock %}page={{ page_obj.next_page_number }}">Старіше</a></li>
+		            {% endif %}
+		        </ul>
+		    </nav>
+		    {% endif %}
+		</div>
+        {% endblock %}
+
+        {% block aside %}
+        <!-- Side widgets-->
+        <div class="col-lg-4">
+            <!-- Search widget-->
+            {% block search %}
+            <div class="card border-warning mb-4">
+                <div class="card-header bg-transparent border-warning">Пошук</div>
+                <div class="card-body">
+                	<form class="input-group" action="{% url 'search' %}" method="get">
+                    	<input class="form-control bg-transparent border-warning" type="text" name="s" placeholder="Ваш пошуковий запит..." aria-label="Enter search term..." aria-describedby="button-search" />
+                    	<button class="btn btn-primary" id="button-search" type="submit">Знайти</button>
+                    </form>	
+                </div>
+            </div>
+            {% endblock %}
+            <!-- Categories widget-->
+            {% block categories %}
+                {% show_menu %}
+                {% show_tags %}
+                {% get_popular %}
+            {% endblock %}
+        </div>
+        {% endblock %}
+    </div>
+</div>
+
+<!-- Footer-->
+        <footer class="bg-warning">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
+            <div class="container">
+            	{% block footer %}
+                <a class="navbar-brand" href="{% url 'home' %}">Ukranie Civil Society Hub</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+						<li class="nav-item"><a class="nav-link active" href="{% url 'home' %}">Головна</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="{% url 'about_us' %}">Про нас</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="{% url 'contact' %}">Зворотній зв'язок</a></li>
+                    </ul>
+                </div>
+                {% endblock %}
+            </div>
+        </nav>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'js/scripts.js' %}"></script>
+    </body>
+</html>

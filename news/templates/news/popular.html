@@ -1,0 +1,29 @@
+<div class="card mb-4 border-warning">
+    <div class="card-header bg-primary border-primary badge">Популярні публікації</div>
+    <div class="card-body {{ menu_class }}">
+        <div class="row">
+            
+                {% for post in posts %}
+                <div class=" mb-3">
+                    {% if post.short_story %}
+                        {% if post.photo %}
+                            <img class="card-img-top" src="{{ post.photo.url }}" alt="{{ post.title }}" width="850" />
+                        {% endif %}
+                            <h4 class="card-title">{{ post.title }}</h4>
+                            <div class="small text-muted">{{ post.created_at }}{% if post.author %}, {{ post.author }}{% endif %}</div>
+                    {% else %}
+                    <a class="text-decoration-none" href="{{ post.get_absolute_url }}">
+                        {% if post.photo %}
+                        <img class="card-img-top" src="{{ post.photo.url }}" alt="{{ post.title }}" width="850" />
+                        {% endif %}
+                        <h4 class="card-title">{{ post.title }}</h4>
+                        <div class="small text-muted">{{ post.created_at }}{% if post.author %}, {{ post.author }}{% endif %}</div>
+                    </a>
+                    {% endif %}
+                </div>
+                <hr style="color: blue;">
+                {% endfor %}
+            
+        </div>
+    </div>
+</div>
